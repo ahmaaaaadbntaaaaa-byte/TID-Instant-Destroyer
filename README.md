@@ -16,7 +16,7 @@ ORCID: [0009-0001-4360-0802](https://orcid.org/0009-0001-4360-0802)
 Zenodo Record: [10.5281/zenodo.17576479](https://doi.org/10.5281/zenodo.17576479)
 
 ## Contact
-- 📧 ahmadqasemhasan@tutamail.com  
+- 📧 [ahmadqasemhasan@tutamail.com](mailto:ahmadqasemhasan@tutamail.com)  
 - 🔗 [LinkedIn](https://www.linkedin.com/in/ahmad-hasan-5aa031267)
 
 ## Intellectual Property Notice
