@@ -1,6 +1,6 @@
 # TID — The Instant Destroyer
 *Hardware-enforced zeroization protocol for CPU-level cryptographic security.*
-
+[![DOI](https://zenodo.org/badge/1094634926.svg)](https://doi.org/10.5281/zenodo.17585930)
 ## Overview
 TID (The Instant Destroyer) is a hardware-enforced protocol designed to instantly zeroize cryptographic keys within CPU cache memory and provide verifiable Proof of Deletion (PoD).  
 This concept introduces a new security paradigm for microarchitectural protection against transient data leakage and side-channel attacks.
