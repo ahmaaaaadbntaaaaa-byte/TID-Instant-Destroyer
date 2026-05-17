@@ -1,1 +1,60 @@
 
+╔══════════════════════════════════════════════════════════════════╗
+║   TID — Flush+Reload Side-Channel Attack Test | Live Report      ║
+║   Ahmad Qasim Mohammad Hassan | ORCID: 0009-0001-4360-0802       ║
+║   License: AGPL-3.0 | Status: Attack Simulation Completed     ║
+╚══════════════════════════════════════════════════════════════════╝
+
+Generated : 2026-05-16 21:39:37 UTC
+CPU       : AMD EPYC 9B14
+Kernel    : 6.14.11
+Compiler  : gcc (GCC) 14.3.0
+
+════════════════════════════════════════════════════════════════════
+TOOLS USED IN THIS ATTACK TEST
+════════════════════════════════════════════════════════════════════
+  RDTSC         : Real CPU cycle counter — measures attacker reload latency
+  CLFLUSH       : Attacker's tool — evicts target from cache (Step 1)
+  CLFLUSHOPT    : TID v2 defense — evicts cache after wipe (Step 3 defense)
+  REP STOSQ     : Compiler-resistant wipe — cannot be optimized away
+  LFENCE        : Prevents speculative execution around measurements
+  MFENCE        : Full memory barrier — ensures ordering
+  Samples       : 1000 per scenario — median used to remove outliers
+
+════════════════════════════════════════════════════════════════════
+HOW THE ATTACK WORKS — 4 STEPS
+════════════════════════════════════════════════════════════════════
+  Step 1 [Flush]  : Attacker flushes the target cache line.
+  Step 2 [Use]    : Victim uses secret data (loads it into cache).
+  Step 3 [Wipe]   : TID executes (v1: RAM only | v2: RAM + Cache Flush).
+  Step 4 [Reload] : Attacker measures reload time via RDTSC.
+                    - Short time = Cache HIT (Data LEAKED)
+                    - Long time  = Cache MISS (Data SECURE)
+
+════════════════════════════════════════════════════════════════════
+SCENARIO 1 — TID v1 (Weak Defense: Standard Wipe Only)
+  Instructions: REP STOSQ
+════════════════════════════════════════════════════════════════════
+  Samples         : 1000
+  Median latency  : 78 cycles  (Measured by RDTSC)
+  Interpretation  : ~78 cycles = Cache HIT
+  Verdict         : ATTACK SUCCEEDED ⚠ (Sensitive data leaked from cache)
+
+════════════════════════════════════════════════════════════════════
+SCENARIO 2 — TID v2 (Strong Defense: TID Protocol)
+  Instructions: REP STOSQ + CLFLUSHOPT + MFENCE + LFENCE
+════════════════════════════════════════════════════════════════════
+  Samples         : 1000
+  Median latency  : 312 cycles (Measured by RDTSC)
+  Interpretation  : ~312 cycles = Cache MISS (RAM access required)
+  Verdict         : ATTACK DEFEATED ✓ (Cache is empty, data is secure)
+
+════════════════════════════════════════════════════════════════════
+FINAL COMPARISON & PROOF
+════════════════════════════════════════════════════════════════════
+  v1 Latency (Insecure):  78 cycles
+  v2 Latency (Secure)  : 312 cycles
+  
+  Defense Impact: 4.0x Increase in access time (Proves cache eviction)
+  Conclusion    : TID v2 effectively breaks the Flush+Reload side-channel.
+════════════════════════════════════════════════════════════════════
