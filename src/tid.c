@@ -1,4 +1,9 @@
-// SPDX-License-Identifier: AGPL-3.0
+// SPDX-License-Identifier: AGPL-3.0-only
+/*
+ * This file is licensed under AGPL-3.0-only.
+ * MODULE_LICENSE("GPL") is required by the Linux kernel
+ * infrastructure and does not override the AGPL-3.0 license.
+ */
 /*
  * TID — The Instant Destroyer
  * Linux kernel module for compiler-resistant secure memory
