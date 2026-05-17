@@ -1,1 +1,64 @@
-
+4018b5:	f3 48 ab             	rep stos %rax,%es:(%rdi)
+401901:	66 0f ae 3a          	clflushopt (%rdx)
+401913:	66 0f ae 38          	clflushopt (%rax)
+401930:	66 0f ae 38          	clflushopt (%rax)
+401938:	66 0f ae 3a          	clflushopt (%rdx)
+401945:	0f ae f0             	mfence
+╔══════════════════════════════════════════════════════════════╗
+║   TID — The Instant Destroyer | Functional Test Report       ║
+║   Ahmad Qasim Mohammad Hassan | ORCID: 0009-0001-4360-0802   ║
+╚══════════════════════════════════════════════════════════════╝
+​Generated  : 2026-05-16 22:15:07 UTC
+CPU        : model name	: AMD EPYC 9B14
+Kernel     : 6.14.11
+Compiler   : gcc (GCC) 14.3.0
+CLFLUSHOPT : PRESENT ✓
+Build Flags: gcc -O2 -mclflushopt
+​════════════════════════════════════════════════════════════════
+HOW TID ZEROIZES MEMORY — 3 PHASES
+════════════════════════════════════════════════════════════════
+​WIPE  : Using REP STOSQ (Zeroes out the RAM bytes)
+​EVIC  : Using CLFLUSHOPT (Evicts the zeroes from Cache to RAM)
+​SYNC  : Using MFENCE (Ensures all operations are visible/complete)
+​--- DISASSEMBLY PROOF (Instruction Check) ---
+The binary contains:
+[FOUND] REP STOSQ  : Pattern f3 48 ab
+[FOUND] CLFLUSHOPT : Pattern 66 0f ae
+[FOUND] MFENCE     : Pattern 0f ae f0
+​════════════════════════════════════════════════════════════════
+FUNCTIONAL CORRECTNESS — Byte-by-byte verification (0x00)
+════════════════════════════════════════════════════════════════
+[PASS] size=1               latency: 242 ns
+[PASS] size=3               latency: 228 ns
+[PASS] size=7               latency: 225 ns
+[PASS] size=8               latency: 265 ns
+[PASS] size=15              latency: 231 ns
+[PASS] size=16              latency: 229 ns
+[PASS] size=31              latency: 244 ns
+[PASS] size=32              latency: 240 ns
+[PASS] size=63              latency: 258 ns
+[PASS] size=64              latency: 280 ns
+[PASS] size=127             latency: 265 ns
+[PASS] size=128             latency: 271 ns
+[PASS] size=255             latency: 277 ns
+[PASS] size=256             latency: 280 ns
+[PASS] size=511             latency: 282 ns
+[PASS] size=512             latency: 295 ns
+[PASS] size=1023            latency: 254 ns
+[PASS] size=1024            latency: 260 ns
+[PASS] size=2047            latency: 288 ns
+[PASS] size=2048            latency: 312 ns
+[PASS] size=4095            latency: 415 ns
+[PASS] size=4096            latency: 400 ns
+[PASS] size=65535           latency: 3210 ns
+[PASS] size=65536           latency: 3170 ns
+[PASS] size=131072          latency: 7055 ns
+[PASS] size=262144          latency: 12300 ns
+[PASS] size=524288          latency: 24110 ns
+[PASS] size=1048575         latency: 45980 ns
+[PASS] size=1048576         latency: 45510 ns
+​Total Results: 29 tests passed, 0 failed.
+Integrity Check: ALL BYTES ARE 0x00 ✓
+​════════════════════════════════════════════════════════════════
+PERFORMANCE BENCHMARK — 1000 iterations per size, warm-up included
+════════════════════════════════════════════════════════════════
