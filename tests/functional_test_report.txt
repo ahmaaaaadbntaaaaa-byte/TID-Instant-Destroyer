@@ -1,1 +1,93 @@
 
+  4018b5:	f3 48 ab             	rep stos %rax,%es:(%rdi)
+  401901:	66 0f ae 3a          	clflushopt (%rdx)
+  401913:	66 0f ae 38          	clflushopt (%rax)
+  401930:	66 0f ae 38          	clflushopt (%rax)
+  401938:	66 0f ae 3a          	clflushopt (%rdx)
+  401945:	0f ae f0             	mfence
+╔══════════════════════════════════════════════════════════════╗
+║   TID — The Instant Destroyer | Functional Test Report       ║
+║   Ahmad Qasim Mohammad Hassan | ORCID: 0009-0001-4360-0802   ║
+╚══════════════════════════════════════════════════════════════╝
+
+Generated  : 2026-05-16 22:15:07 UTC
+CPU        : model name	: AMD EPYC 9B14
+Kernel     : 6.14.11
+Compiler   : gcc (GCC) 14.3.0
+CLFLUSHOPT : PRESENT ✓
+Build Flags: gcc -O2 -mclflushopt
+
+════════════════════════════════════════════════════════════════
+HOW TID ZEROIZES MEMORY — 3 PHASES
+════════════════════════════════════════════════════════════════
+  Phase 1 — REP STOSQ     : writes zeros 8 bytes per cycle
+                            compiler cannot remove this (inline asm)
+  Phase 2 — CLFLUSHOPT    : evicts every 64-byte cache line
+                            removes data from L1 / L2 / L3
+  Phase 3 — MFENCE        : full memory barrier
+                            ensures all evictions complete before return
+
+════════════════════════════════════════════════════════════════
+DISASSEMBLY PROOF — key instructions present in -O2 binary
+════════════════════════════════════════════════════════════════
+
+════════════════════════════════════════════════════════════════
+FUNCTIONAL TEST SUITE — correctness on 29 buffer sizes
+  Pattern: buffer filled with 0xAB, then zeroized, then verified
+════════════════════════════════════════════════════════════════
+  [PASS] size=1               370 ns  all bytes = 0x00 ✓
+  [PASS] size=3               240 ns  all bytes = 0x00 ✓
+  [PASS] size=7               250 ns  all bytes = 0x00 ✓
+  [PASS] size=8               250 ns  all bytes = 0x00 ✓
+  [PASS] size=9               250 ns  all bytes = 0x00 ✓
+  [PASS] size=15              240 ns  all bytes = 0x00 ✓
+  [PASS] size=16              240 ns  all bytes = 0x00 ✓
+  [PASS] size=17              240 ns  all bytes = 0x00 ✓
+  [PASS] size=31              260 ns  all bytes = 0x00 ✓
+  [PASS] size=32              250 ns  all bytes = 0x00 ✓
+  [PASS] size=33              230 ns  all bytes = 0x00 ✓
+  [PASS] size=37              250 ns  all bytes = 0x00 ✓
+  [PASS] size=63              240 ns  all bytes = 0x00 ✓
+  [PASS] size=64              240 ns  all bytes = 0x00 ✓
+  [PASS] size=65              260 ns  all bytes = 0x00 ✓
+  [PASS] size=100             260 ns  all bytes = 0x00 ✓
+  [PASS] size=127             250 ns  all bytes = 0x00 ✓
+  [PASS] size=128             250 ns  all bytes = 0x00 ✓
+  [PASS] size=256             260 ns  all bytes = 0x00 ✓
+  [PASS] size=511             280 ns  all bytes = 0x00 ✓
+  [PASS] size=512             270 ns  all bytes = 0x00 ✓
+  [PASS] size=1024            280 ns  all bytes = 0x00 ✓
+  [PASS] size=4095            430 ns  all bytes = 0x00 ✓
+  [PASS] size=4096            420 ns  all bytes = 0x00 ✓
+  [PASS] size=65535          3340 ns  all bytes = 0x00 ✓
+  [PASS] size=65536          3330 ns  all bytes = 0x00 ✓
+  [PASS] size=131072         8300 ns  all bytes = 0x00 ✓
+  [PASS] size=524288        31630 ns  all bytes = 0x00 ✓
+  [PASS] size=1048576       54670 ns  all bytes = 0x00 ✓
+════════════════════════════════════════════════════════════════
+Results: 29 passed, 0 failed
+════════════════════════════════════════════════════════════════
+
+════════════════════════════════════════════════════════════════
+PERFORMANCE BENCHMARK — 1000 iterations per size, warm-up included
+════════════════════════════════════════════════════════════════
+  Size       | min ns       | avg ns       | max ns       | GB/s (avg)  
+  -----------|--------------|--------------|--------------|-------------
+  32 B       |          240 |          372 |        43650 |         0.09
+  64 B       |          280 |          307 |          630 |         0.21
+  256 B      |          280 |          346 |          630 |         0.74
+  1 KB       |          260 |          314 |        14560 |         3.26
+  4 KB       |          400 |          503 |        10930 |         8.14
+  16 KB      |          960 |         1081 |         1400 |        15.16
+  64 KB      |         3170 |         3731 |        16450 |        17.57
+  256 KB     |        12300 |        14345 |       121310 |        18.27
+  1 MB       |        45510 |        54875 |       145740 |        19.11
+
+╔══════════════════════════════════════════════════════════════╗
+║  CONCLUSION                                                   ║
+║  • All 29 sizes zeroized correctly (0 failures)              ║
+║  • REP STOSQ + CLFLUSHOPT + MFENCE survive -O2 optimization  ║
+║  • Peak throughput: ~20 GB/s on 256 KB – 1 MB buffers        ║
+║  • Sub-microsecond latency for buffers below 4 KB            ║
+╚══════════════════════════════════════════════════════════════╝
+
