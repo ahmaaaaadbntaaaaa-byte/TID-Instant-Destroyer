@@ -16,6 +16,8 @@ TID is a specialized protocol designed to eliminate sensitive data remnants (suc
 - **Lead Researcher:** Ahmad Qasim Mohammad Hassan
 - **ORCID:** [0009-0001-4360-0802](https://orcid.org/0009-0001-4360-0802)
 - **Professional Profile:** [LinkedIn Profile](https://www.linkedin.com/in/ahmad-hasan-5aa031267/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17585929.svg)](https://doi.org/10.5281/zenodo.17585929)
+
 
 ## Documentation & License
 - Detailed research papers and technical execution reports are located in the `/research` folder.
