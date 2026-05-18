@@ -9,8 +9,8 @@ TID is a specialized protocol designed to eliminate sensitive data remnants (suc
 
 ## Key Achievements
 * **Verified Defense:** Effectively mitigates **Flush+Reload** and similar microarchitectural side-channel attacks.
-* **Measurable Performance:** * **Unprotected Access:** ~$78$ CPU cycles (Cache Hit).
-  * **TID Protected Access:** ~$286$ CPU cycles (Cache Miss).
+* **Measurable Performance:** * **Unprotected Access:** ~78 CPU cycles (Cache Hit).
+  * **TID Protected Access:** ~286 CPU cycles (Cache Miss).
   * **Security Margin:** Provides a **3.7x latency barrier**, successfully blinding potential attackers.
 * **Hardware-Level Precision:** Utilizes optimized CPU instructions (`CLFLUSHOPT`, `MFENCE`) to ensure physical cache eviction.
 
