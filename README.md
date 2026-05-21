@@ -18,6 +18,12 @@ TID is a specialized protocol designed to eliminate sensitive data remnants (suc
 
 ---
 
+### Support the Research
+
+TID is an independent security research project. Bare-metal hardware testing on high-end enterprise processors is resource-intensive and costly. By sponsoring this project, you directly support the infrastructure costs required for ongoing validation and security research.
+
+---
+
 ## Author & Identity
 
 * **Lead Researcher:** Ahmad Qasim Mohammad Hassan
@@ -31,9 +37,3 @@ TID is a specialized protocol designed to eliminate sensitive data remnants (suc
 
 * Detailed research papers and technical execution reports are located in the `/research` folder.
 * This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.
-
----
-
-### Support the Research
-
-TID is an independent security research project. Bare-metal hardware testing on high-end enterprise processors is resource-intensive and costly. By sponsoring this project, you directly support the infrastructure costs required for ongoing validation and security research.
