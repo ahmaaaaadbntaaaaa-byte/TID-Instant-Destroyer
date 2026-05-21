@@ -5,9 +5,11 @@
 ---
 
 ## Overview
+
 TID is a specialized protocol designed to eliminate sensitive data remnants (such as cryptographic keys) from CPU cache layers ($L1, L2, \text{ and } L3$) immediately after use. It addresses a critical security gap where data persists in hardware structures even after being wiped from system memory (RAM).
 
 ## Key Achievements
+
 * **Verified Defense:** Effectively mitigates **Flush+Reload** and similar microarchitectural side-channel attacks.
 * **Measurable Performance:** * **Unprotected Access:** ~78 CPU cycles (Cache Hit).
   * **TID Protected Access:** ~286 CPU cycles (Cache Miss).
@@ -26,10 +28,12 @@ TID is a specialized protocol designed to eliminate sensitive data remnants (suc
 ---
 
 ## Documentation & License
+
 * Detailed research papers and technical execution reports are located in the `/research` folder.
 * This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.
+
 ---
+
 ### Support the Research
+
 TID is an independent security research project. Bare-metal hardware testing on high-end enterprise processors is resource-intensive and costly. By sponsoring this project, you directly support the infrastructure costs required for ongoing validation and security research.
-
-
