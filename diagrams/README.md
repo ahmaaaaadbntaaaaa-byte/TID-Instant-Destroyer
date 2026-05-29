@@ -44,7 +44,7 @@ This folder contains the complete visual reference for the TID project — 10 di
 
 | File | Contents |
 |------|----------|
-| `TID_Diagrams.pptx` | Original editable PowerPoint — 12 slides |
+|
 | `TID_Diagrams.pdf` | PDF export — available in `docs/` |
 
 ---
