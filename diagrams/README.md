@@ -19,7 +19,7 @@ This folder contains the complete visual reference for the TID project — 10 di
 | 4 | **Cache Comparison: Before and After TID** | Side-by-side cache state across three scenarios: No TID / TID v1.0 / TID v2.0 |
 | 5 | **Performance Comparison** | CPU cycles comparison — v1.0 (78 cycles, Cache HIT, leak) vs. v2.0 (286 cycles, Cache MISS, attack blind) — ratio: 3.7× |
 | 6 | **TID vs Existing Libraries** | Feature comparison table: memset / explicit_bzero / OpenSSL / libsodium / TID v2.0 / Intel SGX |
-| 7 | **Statistical Key Reconstruction Attack** | Shows how an attacker reconstructs an AES key byte-by-byte via Flush+Reload on TID v1 (987/1000 hits) — and why TID v2 breaks the chain (0/1000) |
+| 7 | **Statistical Key Reconstruction Attack** | Shows how an attacker reconstructs an AES key byte-by-byte via Flush+Reload on TID v1 (987/1000 hits) — and why TID v2 breaks the chain (0/1000)[...] |
 | 8 | **Security Solution Ladder** | Ranks solutions from weakest to strongest — TID v2.0 is the maximum achievable at software level without dedicated hardware |
 | 9 | **Physical Minimum Latency of TID** | Per-instruction timing breakdown — the 300–372ns total is a CPU physics constraint, not a code limitation |
 | 10 | **Experimental Proof Summary** | All three tests on AMD EPYC 9B14 — Basic Attack (1,000 samples), Timing Window (10,000 samples), CPU Shield (5,000 samples) |
@@ -44,7 +44,6 @@ This folder contains the complete visual reference for the TID project — 10 di
 
 | File | Contents |
 |------|----------|
-|
 | `TID_Diagrams.pdf` | PDF export — available in `docs/` |
 
 ---
